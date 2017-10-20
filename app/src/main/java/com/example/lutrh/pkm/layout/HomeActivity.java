@@ -1,7 +1,10 @@
 package com.example.lutrh.pkm.layout;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -9,14 +12,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
-
-import layout.HistoryFragment;
-import layout.HomeFragment;
+import com.example.lutrh.pkm.fragment.HistoryFragment;
+import com.example.lutrh.pkm.fragment.HomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
+
+    public static final int CAMERA_REQUEST = 20;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -52,6 +57,4 @@ public class HomeActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-
 }

@@ -86,7 +86,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ig_padi">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -112,7 +113,8 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ig_jagung">
 
                     <TextView
                         android:layout_width="match_parent"

@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lutrh.pkm">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
         android:allowBackup="true"
@@ -21,7 +28,14 @@
         <activity
             android:name=".layout.HomeActivity"
             android:label="@string/title_activity_home" />
-        <activity android:name=".layout.CameraActivity"></activity>
+        <activity
+            android:name=".layout.CameraActivity"
+            android:parentActivityName="com.example.lutrh.pkm.layout.HomeActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lutrh.pkm.layout.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
