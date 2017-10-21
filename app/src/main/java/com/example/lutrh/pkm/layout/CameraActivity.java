@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
+import com.example.lutrh.pkm.helper.DatabaseHelper;
+import com.example.lutrh.pkm.model.Hama;
+import com.example.lutrh.pkm.model.History;
 import com.example.lutrh.pkm.model.ResponseApi;
 import com.example.lutrh.pkm.model.service.UserClient;
 
@@ -37,6 +41,7 @@ public class CameraActivity extends AppCompatActivity {
     private File imageFile;
     private LinearLayout viewCalculating;
     private ScrollView scrollDetailHama;
+    private DatabaseHelper db;
 
     Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl("https://pkm-server.herokuapp.com/")
@@ -53,6 +58,7 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         setTitle("Pest Detail");
 
+        db = new DatabaseHelper(this);
         viewCalculating = (LinearLayout) findViewById(R.id.view_calculate);
         scrollDetailHama = (ScrollView) findViewById(R.id.scroll_detail_hama);
 
@@ -109,6 +115,8 @@ public class CameraActivity extends AppCompatActivity {
                     }
                 });
             }
+        } else {
+            finish();
         }
     }
 
@@ -122,8 +130,20 @@ public class CameraActivity extends AppCompatActivity {
         getSupportActionBar().show();
         ImageView imageHama = (ImageView) findViewById(R.id.image_hama);
         TextView textHama = (TextView) findViewById(R.id.text_nama_hama);
+        TextView textNamaLatin = (TextView) findViewById(R.id.text_nama_latin);
+        TextView textDitemukan = (TextView) findViewById(R.id.text_ditemukan);
+        TextView textDeskripsi = (TextView) findViewById(R.id.text_deskripsi);
+        TextView textSolusi = (TextView) findViewById(R.id.text_solution);
 
-        textHama.setText(responseApi.getHama());
+        History history = new History(0, responseApi.getHama());
+        db.addHistory(history);
+        Hama hama = db.getHama(responseApi.getHama());
+
+        textHama.setText(hama.getNama());
+        textNamaLatin.setText(hama.getNamaLatin());
+        textDitemukan.setText("Usually found at rice " + hama.getDitemukan());
+        textDeskripsi.setText(hama.getDeskripsi());
+        textSolusi.setText(hama.getSolusi());
 
         switch (responseApi.getHama()) {
             case "wereng":
@@ -131,6 +151,12 @@ public class CameraActivity extends AppCompatActivity {
                 break;
             case "belalang":
                 imageHama.setImageResource(R.drawable.ig_belalang);
+                break;
+            case "tikus sawah":
+                imageHama.setImageResource(R.drawable.ig_tikus);
+                break;
+            case "walang sangit":
+                imageHama.setImageResource(R.drawable.ig_walang_sangit);
                 break;
         }
         viewCalculating.setVisibility(View.GONE);

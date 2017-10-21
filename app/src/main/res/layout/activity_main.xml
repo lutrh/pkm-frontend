@@ -27,8 +27,8 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="35sp"
-            android:text="APP NAME"/>
+            android:textSize="30sp"
+            android:text="Rice Pest Detector"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -37,6 +37,11 @@
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="13sp"/>
+
+        <ProgressBar
+            android:layout_marginTop="16dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp" />
     </LinearLayout>
 
 </RelativeLayout>
