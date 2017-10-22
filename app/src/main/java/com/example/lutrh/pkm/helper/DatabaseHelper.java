@@ -12,6 +12,8 @@ import com.example.lutrh.pkm.model.History;
 import java.util.LinkedList;
 import java.util.List;
 
+import static android.R.id.list;
+
 /**
  * Created by lutrh on 10/22/17.
  */
@@ -101,5 +103,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             } while (cursor.moveToNext());
         }
         return listHistory;
+    }
+
+    public List<Hama> getHamaByDitemukan(String ditemukan) {
+        List<Hama> listHama = new LinkedList<>();
+
+        String query = "SELECT * FROM hama where ditemukan = '" + ditemukan + "'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Hama hama = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                hama = new Hama();
+                hama.setNama(cursor.getString(0));
+                hama.setNamaLatin(cursor.getString(1));
+                hama.setDeskripsi(cursor.getString(2));
+                hama.setSolusi(cursor.getString(3));
+                hama.setDitemukan(cursor.getString(4));
+                hama.setSuhuHidup(cursor.getString(5));
+                listHama.add(hama);
+            } while (cursor.moveToNext());
+        }
+        return listHama;
     }
 }

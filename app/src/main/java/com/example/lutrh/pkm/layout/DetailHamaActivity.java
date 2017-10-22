@@ -1,6 +1,7 @@
 package com.example.lutrh.pkm.layout;
 
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,11 +27,14 @@ public class DetailHamaActivity extends AppCompatActivity {
         Intent intent = getIntent();
         namaHama = intent.getExtras().getString("nama_hama");
         viewDetail();
+
+        setTitle(intent.getExtras().getString("nama_hama"));
     }
 
     private void viewDetail() {
         getSupportActionBar().show();
         ImageView imageHama = (ImageView) findViewById(R.id.image_hama);
+        ImageView imageDitemukan = (ImageView) findViewById(R.id.image_ditemukan);
         TextView textHama = (TextView) findViewById(R.id.text_nama_hama);
         TextView textNamaLatin = (TextView) findViewById(R.id.text_nama_latin);
         TextView textDitemukan = (TextView) findViewById(R.id.text_ditemukan);
@@ -57,6 +61,18 @@ public class DetailHamaActivity extends AppCompatActivity {
                 break;
             case "walang sangit":
                 imageHama.setImageResource(R.drawable.ig_walang_sangit);
+                break;
+        }
+
+        switch (hama.getDitemukan()) {
+            case "leaves":
+                imageDitemukan.setImageResource(R.drawable.ic_leafs);
+                break;
+            case "log":
+                imageDitemukan.setImageResource(R.drawable.ic_log);
+                break;
+            case "water":
+                imageDitemukan.setImageResource(R.drawable.ic_water);
                 break;
         }
     }

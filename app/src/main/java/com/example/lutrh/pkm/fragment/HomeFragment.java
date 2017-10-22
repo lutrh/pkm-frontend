@@ -2,6 +2,7 @@ package com.example.lutrh.pkm.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
+import com.example.lutrh.pkm.layout.HamaByDitemukanActivity;
 import com.example.lutrh.pkm.layout.HomeActivity;
 import com.example.lutrh.pkm.model.WeatherApi;
 import com.example.lutrh.pkm.model.service.UserClient;
@@ -28,7 +31,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.example.lutrh.pkm.R.id.container;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private SimpleLocation location;
@@ -37,6 +40,7 @@ public class HomeFragment extends Fragment {
     private String kota, main;
     private CardView weatherPanel, loadingPanel;
     private ImageView mainWeather;
+    private LinearLayout linearLeaves, linearLog, linearWater;
 
     Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://api.openweathermap.org/data/2.5/").addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit = builder.build();
@@ -65,6 +69,7 @@ public class HomeFragment extends Fragment {
         if (kota == null || suhu == 0) {
             getWeather();
         }
+        getActivity().setTitle("Dictionary");
     }
 
     @Override
@@ -75,6 +80,15 @@ public class HomeFragment extends Fragment {
         weatherPanel = (CardView) v.findViewById(R.id.weather_panel);
         loadingPanel = (CardView) v.findViewById(R.id.loading_panel);
         mainWeather = (ImageView) v.findViewById(R.id.image_main);
+        linearLeaves = (LinearLayout) v.findViewById(R.id.linear_leaves);
+        linearLog = (LinearLayout) v.findViewById(R.id.linear_log);
+        linearWater = (LinearLayout) v.findViewById(R.id.linear_water);
+
+        linearLeaves.setOnClickListener(this);
+        linearLog.setOnClickListener(this);
+        linearWater.setOnClickListener(this);
+
+
         return v;
     }
 
@@ -166,5 +180,22 @@ public class HomeFragment extends Fragment {
         }
         weatherPanel.setVisibility(View.VISIBLE);
         loadingPanel.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(getActivity(), HamaByDitemukanActivity.class);
+        switch (view.getId()) {
+            case R.id.linear_leaves:
+                intent.putExtra("ditemukan", "leaves");
+                break;
+            case R.id.linear_log:
+                intent.putExtra("ditemukan", "log");
+                break;
+            case R.id.linear_water:
+                intent.putExtra("ditemukan", "water");
+                break;
+        }
+        startActivity(intent);
     }
 }

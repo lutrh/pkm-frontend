@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
@@ -26,6 +28,9 @@ public class HistoryFragment extends Fragment {
     private RecyclerView recyclerHistory;
     private RecyclerView.Adapter adapter;
     private List<History> mHistory;
+    private TextView textHistory, textDeskripsi;
+    private RelativeLayout relativeNoFound;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,10 +45,19 @@ public class HistoryFragment extends Fragment {
         recyclerHistory = (RecyclerView) view.findViewById(R.id.recycle_history);
         recyclerHistory.setHasFixedSize(true);
         recyclerHistory.setLayoutManager(new LinearLayoutManager(getActivity()));
+        textHistory = (TextView) view.findViewById(R.id.text_history);
+        textDeskripsi = (TextView) view.findViewById(R.id.text_deskripsi);
+        relativeNoFound = (RelativeLayout) view.findViewById(R.id.relative_no_found);
 
         mHistory = db.getAllHistory();
         adapter = new HistoryAdapter(mHistory, getActivity());
         recyclerHistory.setAdapter(adapter);
+
+        if (mHistory.size() == 0) {
+            textHistory.setVisibility(View.GONE);
+            textDeskripsi.setText("Oops, you don't have any history yet");
+            relativeNoFound.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }

@@ -1,6 +1,7 @@
 package com.example.lutrh.pkm.layout;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -129,6 +130,7 @@ public class CameraActivity extends AppCompatActivity {
     private void viewDetail(ResponseApi responseApi) {
         getSupportActionBar().show();
         ImageView imageHama = (ImageView) findViewById(R.id.image_hama);
+        ImageView imageDitemukan = (ImageView) findViewById(R.id.image_ditemukan);
         TextView textHama = (TextView) findViewById(R.id.text_nama_hama);
         TextView textNamaLatin = (TextView) findViewById(R.id.text_nama_latin);
         TextView textDitemukan = (TextView) findViewById(R.id.text_ditemukan);
@@ -145,7 +147,7 @@ public class CameraActivity extends AppCompatActivity {
         textDeskripsi.setText(hama.getDeskripsi());
         textSolusi.setText(hama.getSolusi());
 
-        switch (responseApi.getHama()) {
+        switch (hama.getNama()) {
             case "wereng":
                 imageHama.setImageResource(R.drawable.ig_wereng);
                 break;
@@ -157,6 +159,18 @@ public class CameraActivity extends AppCompatActivity {
                 break;
             case "walang sangit":
                 imageHama.setImageResource(R.drawable.ig_walang_sangit);
+                break;
+        }
+
+        switch (hama.getDitemukan()) {
+            case "leaves":
+                imageDitemukan.setImageResource(R.drawable.ic_leafs);
+                break;
+            case "log":
+                imageDitemukan.setImageResource(R.drawable.ic_log);
+                break;
+            case "water":
+                imageDitemukan.setImageResource(R.drawable.ic_water);
                 break;
         }
         viewCalculating.setVisibility(View.GONE);

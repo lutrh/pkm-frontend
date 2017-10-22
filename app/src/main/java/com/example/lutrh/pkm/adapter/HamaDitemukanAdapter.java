@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.lutrh.pkm.R;
 import com.example.lutrh.pkm.helper.DatabaseHelper;
 import com.example.lutrh.pkm.layout.DetailHamaActivity;
-import com.example.lutrh.pkm.model.History;
+import com.example.lutrh.pkm.model.Hama;
 
 import java.util.List;
 
@@ -22,31 +22,32 @@ import java.util.List;
  * Created by lutrh on 10/13/17.
  */
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
+public class HamaDitemukanAdapter extends RecyclerView.Adapter<HamaDitemukanAdapter.ViewHolder> {
 
-    private List<History> mHistory;
+    private List<Hama> mHama;
     private Context mContext;
+    private String ditemukan;
 
-    public HistoryAdapter(List<History> mHistory, Context mContext) {
-        this.mHistory = mHistory;
+    public HamaDitemukanAdapter(List<Hama> mHama, Context mContext, String ditemukan) {
+        this.mHama = mHama;
         this.mContext = mContext;
+        this.ditemukan = ditemukan;
     }
 
     @Override
-    public HistoryAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HamaDitemukanAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_history, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(HistoryAdapter.ViewHolder holder, int position) {
-        final History history = mHistory.get(position);
-        final DatabaseHelper db = new DatabaseHelper(mContext);
-        holder.textNama.setText(db.getHama(history.getHama()).getNama());
-        holder.textNamaLatin.setText(db.getHama(history.getHama()).getNamaLatin());
-        holder.textDitemukan.setText("Usually found at rice " + db.getHama(history.getHama()).getDitemukan());
+    public void onBindViewHolder(HamaDitemukanAdapter.ViewHolder holder, int position) {
+        final Hama hama = mHama.get(position);
+        holder.textNama.setText(hama.getNama());
+        holder.textNamaLatin.setText(hama.getNamaLatin());
+        holder.textDitemukan.setText("Usually found at rice " + hama.getDitemukan());
 
-        switch (db.getHama(history.getHama()).getNama()) {
+        switch (hama.getNama()) {
             case "wereng":
                 holder.imageHama.setImageResource(R.drawable.ig_wereng);
                 break;
@@ -61,7 +62,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 break;
         }
 
-        switch (db.getHama(history.getHama()).getDitemukan()) {
+        switch (hama.getDitemukan()) {
             case "leaves":
                 holder.imageDitemukan.setImageResource(R.drawable.ic_leafs);
                 break;
@@ -73,12 +74,12 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
                 break;
         }
 
-        holder.itemHistory.setOnClickListener(new View.OnClickListener() {
+        holder.itemHama.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, DetailHamaActivity.class);
-                intent.putExtra("nama_hama", db.getHama(history.getHama()).getNama());
+                intent.putExtra("nama_hama", hama.getNama());
                 mContext.startActivity(intent);
             }
         });
@@ -91,14 +92,14 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return mHistory.size();
+        return mHama.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textNama, textNamaLatin, textDitemukan;
         public ImageView imageHama, imageDitemukan;
-        public LinearLayout itemHistory;
+        public LinearLayout itemHama;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,7 +109,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             textDitemukan = (TextView) itemView.findViewById(R.id.text_ditemukan);
             imageHama = (ImageView) itemView.findViewById(R.id.image_hama);
             imageDitemukan = (ImageView) itemView.findViewById(R.id.image_ditemukan);
-            itemHistory = (LinearLayout) itemView.findViewById(R.id.item_history);
+            itemHama = (LinearLayout) itemView.findViewById(R.id.item_history);
         }
     }
 }

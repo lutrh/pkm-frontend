@@ -8,6 +8,9 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import com.example.lutrh.pkm.R;
 import com.example.lutrh.pkm.fragment.HistoryFragment;
 import com.example.lutrh.pkm.fragment.HomeFragment;
@@ -15,6 +18,7 @@ import com.example.lutrh.pkm.fragment.HomeFragment;
 public class HomeActivity extends AppCompatActivity {
 
     public static final int CAMERA_REQUEST = 20;
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -45,7 +49,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        setTitle("Home");
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, new HomeFragment(), "HOME").commit();
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
