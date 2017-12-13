@@ -50,7 +50,7 @@ public class DetailHamaActivity extends AppCompatActivity {
             case "leaves":
                 tempat = "daun";
                 break;
-            case "stem":
+            case "log":
                 tempat = "batang";
                 break;
             case "water":

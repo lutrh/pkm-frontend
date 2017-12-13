@@ -48,7 +48,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             case "leaves":
                 tempat = "daun";
                 break;
-            case "stem":
+            case "log":
                 tempat = "batang";
                 break;
             case "water":

@@ -50,7 +50,7 @@ public class HamaDitemukanAdapter extends RecyclerView.Adapter<HamaDitemukanAdap
             case "leaves":
                 tempat = "daun";
                 break;
-            case "stem":
+            case "log":
                 tempat = "batang";
                 break;
             case "water":
