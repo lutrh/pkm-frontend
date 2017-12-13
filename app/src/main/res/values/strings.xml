@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PKM</string>
+    <string name="app_name">Protector</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_home">Dictionary</string>
     <string name="title_dashboard">Camera</string>

@@ -28,11 +28,12 @@ public class DetailHamaActivity extends AppCompatActivity {
         namaHama = intent.getExtras().getString("nama_hama");
         viewDetail();
 
-        setTitle(intent.getExtras().getString("nama_hama"));
+        setTitle(namaHama.substring(0, 1).toUpperCase() + namaHama.substring(1));
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void viewDetail() {
-        getSupportActionBar().show();
         ImageView imageHama = (ImageView) findViewById(R.id.image_hama);
         ImageView imageDitemukan = (ImageView) findViewById(R.id.image_ditemukan);
         TextView textHama = (TextView) findViewById(R.id.text_nama_hama);
@@ -43,9 +44,23 @@ public class DetailHamaActivity extends AppCompatActivity {
 
         Hama hama = db.getHama(namaHama);
 
-        textHama.setText(hama.getNama());
+
+        String tempat = "";
+        switch (hama.getDitemukan()) {
+            case "leaves":
+                tempat = "daun";
+                break;
+            case "stem":
+                tempat = "batang";
+                break;
+            case "water":
+                tempat = "air";
+                break;
+        }
+
+        textHama.setText(hama.getNama().substring(0, 1).toUpperCase() + hama.getNama().substring(1));
         textNamaLatin.setText(hama.getNamaLatin());
-        textDitemukan.setText("Usually found at rice " + hama.getDitemukan());
+        textDitemukan.setText("Ditemukan di " + tempat);
         textDeskripsi.setText(hama.getDeskripsi());
         textSolusi.setText(hama.getSolusi());
 
@@ -78,8 +93,8 @@ public class DetailHamaActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        super.onBackPressed();
+    public boolean onSupportNavigateUp() {
         finish();
+        return true;
     }
 }

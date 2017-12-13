@@ -43,9 +43,21 @@ public class HamaDitemukanAdapter extends RecyclerView.Adapter<HamaDitemukanAdap
     @Override
     public void onBindViewHolder(HamaDitemukanAdapter.ViewHolder holder, int position) {
         final Hama hama = mHama.get(position);
-        holder.textNama.setText(hama.getNama());
+        holder.textNama.setText(hama.getNama().substring(0, 1).toUpperCase() + hama.getNama().substring(1));
         holder.textNamaLatin.setText(hama.getNamaLatin());
-        holder.textDitemukan.setText("Usually found at rice " + hama.getDitemukan());
+        String tempat = "";
+        switch (hama.getDitemukan()) {
+            case "leaves":
+                tempat = "daun";
+                break;
+            case "stem":
+                tempat = "batang";
+                break;
+            case "water":
+                tempat = "air";
+                break;
+        }
+        holder.textDitemukan.setText("Terdapat di " + tempat);
 
         switch (hama.getNama()) {
             case "wereng":

@@ -65,7 +65,7 @@
                             android:layout_height="16dp"
                             android:layout_below="@+id/text_nama_latin"
                             android:layout_marginTop="8dp"
-                            android:layout_toRightOf="@+id/image_hama"/>
+                            android:layout_toRightOf="@+id/image_hama" />
 
                         <TextView
                             android:id="@+id/text_ditemukan"
@@ -75,7 +75,7 @@
                             android:layout_marginLeft="8dp"
                             android:layout_marginTop="8dp"
                             android:layout_toRightOf="@id/image_ditemukan"
-                            android:text="Usually found at rice leaves" />
+                            android:text="Biasanya ditemukan di daun padi" />
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -96,7 +96,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Description"
+                        android:text="Deskripsi"
                         android:textStyle="bold" />
 
                     <TextView
@@ -104,7 +104,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Tubuh belalang terdiri dari 3 bagian utama, yaitu kepala, dada (thorax) dan perut (abdomen). Belalang juga memiliki 6 enam kaki bersendi, 2 pasang sayap, dan 2 antena. Kaki belakang yang panjang digunakan untuk melompat sedangkan kaki depan yang pendek digunakan untuk berjalan." />
+                        android:text="Belalang adalah serangga herbivora dari subordo Caelifera dalam ordo Orthoptera" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -124,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Solution"
+                        android:text="Pengendalian"
                         android:textStyle="bold" />
 
                     <TextView
@@ -132,11 +132,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Insektisida nabati tentunya dapat digunakan sebagai alternatif pengendalian serangga. Bahan alami itu memenuhi beberapa kriteria yang diinginkan, yaitu aman, murah, mudah diterapkan petani dan efektif membunuh hama serta memiliki keuntungan mudah dibuat." />
+                        android:text="- Atur jarak tanam antar padi 25cm x 25cm" />
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
+import com.example.lutrh.pkm.layout.CuacaActivity;
 import com.example.lutrh.pkm.layout.HamaByDitemukanActivity;
 import com.example.lutrh.pkm.layout.HomeActivity;
 import com.example.lutrh.pkm.model.WeatherApi;
@@ -37,10 +38,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private SimpleLocation location;
     private TextView textNamaKota, textSuhu;
     private int suhu;
-    private String kota, main;
+    private String kota, main, longitude, latitude;
     private CardView weatherPanel, loadingPanel;
     private ImageView mainWeather;
-    private LinearLayout linearLeaves, linearLog, linearWater;
+    private LinearLayout linearLeaves, linearLog, linearWater, linearCuaca;
 
     Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://api.openweathermap.org/data/2.5/").addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit = builder.build();
@@ -83,11 +84,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         linearLeaves = (LinearLayout) v.findViewById(R.id.linear_leaves);
         linearLog = (LinearLayout) v.findViewById(R.id.linear_log);
         linearWater = (LinearLayout) v.findViewById(R.id.linear_water);
+        linearCuaca = (LinearLayout) v.findViewById(R.id.linear_cuaca);
 
         linearLeaves.setOnClickListener(this);
         linearLog.setOnClickListener(this);
         linearWater.setOnClickListener(this);
-
+        linearCuaca.setOnClickListener(this);
 
         return v;
     }
@@ -122,8 +124,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getWeather() {
-        String latitude = String.valueOf(location.getLatitude());
-        String longitude = String.valueOf(location.getLongitude());
+        latitude = String.valueOf(location.getLatitude());
+        longitude = String.valueOf(location.getLongitude());
         String units = "metric";
         String appid = "ece1a8cdc266e5c942e10bc8c21a3f50";
 
@@ -188,14 +190,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.linear_leaves:
                 intent.putExtra("ditemukan", "leaves");
+                startActivity(intent);
                 break;
             case R.id.linear_log:
                 intent.putExtra("ditemukan", "log");
+                startActivity(intent);
                 break;
             case R.id.linear_water:
                 intent.putExtra("ditemukan", "water");
+                startActivity(intent);
+                break;
+            case R.id.linear_cuaca:
+                Intent cuacaIntent = new Intent(getActivity(), CuacaActivity.class);
+                cuacaIntent.putExtra("long", longitude);
+                cuacaIntent.putExtra("lat", latitude);
+                startActivity(cuacaIntent);
                 break;
         }
-        startActivity(intent);
     }
 }

@@ -18,7 +18,7 @@
             android:id="@+id/gambar"
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:src="@drawable/layout_circle"
+            android:src="@drawable/ig_logo"
             android:layout_marginBottom="10dp"/>
 
         <TextView
@@ -28,12 +28,12 @@
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:textSize="30sp"
-            android:text="Rice Pest Detector"/>
+            android:text="PROTECTOR"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="control your field easily"
+            android:text="Paddy Pest Detector"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="13sp"/>

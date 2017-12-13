@@ -42,9 +42,23 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     public void onBindViewHolder(HistoryAdapter.ViewHolder holder, int position) {
         final History history = mHistory.get(position);
         final DatabaseHelper db = new DatabaseHelper(mContext);
-        holder.textNama.setText(db.getHama(history.getHama()).getNama());
+
+        String tempat = "";
+        switch (db.getHama(history.getHama()).getDitemukan()) {
+            case "leaves":
+                tempat = "daun";
+                break;
+            case "stem":
+                tempat = "batang";
+                break;
+            case "water":
+                tempat = "air";
+                break;
+        }
+
+        holder.textNama.setText(db.getHama(history.getHama()).getNama().substring(0, 1).toUpperCase() + db.getHama(history.getHama()).getNama().substring(1));
         holder.textNamaLatin.setText(db.getHama(history.getHama()).getNamaLatin());
-        holder.textDitemukan.setText("Usually found at rice " + db.getHama(history.getHama()).getDitemukan());
+        holder.textDitemukan.setText("Ditemukan di " + tempat);
 
         switch (db.getHama(history.getHama()).getNama()) {
             case "wereng":

@@ -141,9 +141,22 @@ public class CameraActivity extends AppCompatActivity {
         db.addHistory(history);
         Hama hama = db.getHama(responseApi.getHama());
 
-        textHama.setText(hama.getNama());
+        String tempat = "";
+        switch (hama.getDitemukan()) {
+            case "leaves":
+                tempat = "daun";
+                break;
+            case "stem":
+                tempat = "batang";
+                break;
+            case "water":
+                tempat = "air";
+                break;
+        }
+
+        textHama.setText(hama.getNama().substring(0, 1).toUpperCase() + hama.getNama().substring(1));
         textNamaLatin.setText(hama.getNamaLatin());
-        textDitemukan.setText("Usually found at rice " + hama.getDitemukan());
+        textDitemukan.setText("Ditemukan di " + tempat);
         textDeskripsi.setText(hama.getDeskripsi());
         textSolusi.setText(hama.getSolusi());
 

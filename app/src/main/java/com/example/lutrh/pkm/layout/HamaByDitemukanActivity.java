@@ -1,5 +1,6 @@
 package com.example.lutrh.pkm.layout;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class HamaByDitemukanActivity extends AppCompatActivity {
         recyclerHistory.setLayoutManager(new LinearLayoutManager(this));
         relativeNoFound = (RelativeLayout) findViewById(R.id.relative_no_found);
 
+
         Intent intent = getIntent();
         mHama = db.getHamaByDitemukan(intent.getExtras().getString("ditemukan"));
         adapter = new HamaDitemukanAdapter(mHama, this, intent.getExtras().getString("ditemukan"));
@@ -44,7 +46,14 @@ public class HamaByDitemukanActivity extends AppCompatActivity {
         if (mHama.size() == 0) {
             relativeNoFound.setVisibility(View.VISIBLE);
         }
+        setTitle(intent.getExtras().getString("ditemukan").substring(0, 1).toUpperCase() + intent.getExtras().getString("ditemukan").substring(1) + " Pest");
 
-        setTitle(intent.getExtras().getString("ditemukan") + " Pest");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }

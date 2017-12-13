@@ -3,6 +3,7 @@ package com.example.lutrh.pkm.model.service;
 import com.example.lutrh.pkm.model.Hama;
 import com.example.lutrh.pkm.model.ResponseApi;
 import com.example.lutrh.pkm.model.WeatherApi;
+import com.example.lutrh.pkm.model.WeatherDetail;
 
 import java.util.List;
 
@@ -34,5 +35,8 @@ public interface UserClient {
 
     @GET("dictionary/")
     Call<List<Hama>> getDatabase();
+
+    @POST("forecast")
+    Call<WeatherDetail> getForecast(@Query("lat") String latitude, @Query("lon") String longitude, @Query("units") String units, @Query("APPID") String appid);
 
 }
