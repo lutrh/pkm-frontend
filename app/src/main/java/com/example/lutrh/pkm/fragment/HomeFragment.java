@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +37,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
     private SimpleLocation location;
-    private TextView textNamaKota, textSuhu;
+    private TextView textNamaKota, textSuhu, textLoading;
     private int suhu;
     private String kota, main, longitude, latitude;
     private CardView weatherPanel, loadingPanel;
     private ImageView mainWeather;
     private LinearLayout linearLeaves, linearLog, linearWater, linearCuaca;
+    private ProgressBar progressBar;
 
     Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://api.openweathermap.org/data/2.5/").addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit = builder.build();
@@ -59,15 +61,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         if (!location.hasLocationEnabled()) {
             new AlertDialog.Builder(getActivity())
                     .setTitle("Location Permission")
-                    .setMessage("RPD need access to your location")
+                    .setMessage("Protector need access to your location")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             SimpleLocation.openSettings(getActivity());
                         }
                     })
                     .setNegativeButton(android.R.string.no, null).show();
-        }
-        if (kota == null || suhu == 0) {
+        } else {
+            latitude = String.valueOf(location.getLatitude());
+            longitude = String.valueOf(location.getLongitude());
             getWeather();
         }
         getActivity().setTitle("Dictionary");
@@ -85,6 +88,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         linearLog = (LinearLayout) v.findViewById(R.id.linear_log);
         linearWater = (LinearLayout) v.findViewById(R.id.linear_water);
         linearCuaca = (LinearLayout) v.findViewById(R.id.linear_cuaca);
+        textLoading = (TextView) v.findViewById(R.id.text_loading);
+        progressBar = (ProgressBar) v.findViewById(R.id.progress);
+
 
         linearLeaves.setOnClickListener(this);
         linearLog.setOnClickListener(this);
@@ -124,8 +130,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getWeather() {
-        latitude = String.valueOf(location.getLatitude());
-        longitude = String.valueOf(location.getLongitude());
         String units = "metric";
         String appid = "ece1a8cdc266e5c942e10bc8c21a3f50";
 
@@ -145,7 +149,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onFailure(Call<WeatherApi> call, Throwable t) {
                 weatherPanel.setVisibility(View.GONE);
-                loadingPanel.setVisibility(View.GONE);
+                progressBar.setVisibility(View.GONE);
+                textLoading.setText("Cannot retrieve weather data");
             }
         });
     }

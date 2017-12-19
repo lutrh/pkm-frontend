@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.lutrh.pkm.R;
@@ -26,9 +28,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DatabaseHelper db;
+    private ProgressBar progressBar;
+    private LinearLayout linearTry;
 
     Retrofit.Builder builder = new Retrofit.Builder().baseUrl("https://pkm-server.herokuapp.com/").addConverterFactory(GsonConverterFactory.create());
     Retrofit retrofit = builder.build();
@@ -41,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         File database = getApplicationContext().getDatabasePath("RPD.db");
+        progressBar = (ProgressBar) findViewById(R.id.progress);
+        linearTry = (LinearLayout) findViewById(R.id.linear_try);
+        linearTry.setOnClickListener(this);
 
         if (!checkDataBase()) {
             db = new DatabaseHelper(this);
@@ -87,7 +94,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<Hama>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_SHORT).show();
+                linearTry.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        linearTry.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        fetchDatabase();
     }
 }

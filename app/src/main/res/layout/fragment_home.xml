@@ -22,12 +22,14 @@
                 android:padding="8dp">
 
                 <ProgressBar
+                    android:id="@+id/progress"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="8dp" />
 
                 <TextView
+                    android:id="@+id/text_loading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

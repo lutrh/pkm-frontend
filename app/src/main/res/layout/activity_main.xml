@@ -39,9 +39,31 @@
             android:textSize="13sp"/>
 
         <ProgressBar
+            android:id="@+id/progress"
             android:layout_marginTop="16dp"
             android:layout_width="30dp"
             android:layout_height="30dp" />
+
+        <LinearLayout
+            android:id="@+id/linear_try"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="2dp"
+                app:srcCompat="@drawable/ic_refresh_black_24dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="Try again"/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
