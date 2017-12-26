@@ -45,15 +45,9 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
 
         String tempat = "";
         switch (db.getHama(history.getHama()).getDitemukan()) {
-            case "leaves":
-                tempat = "daun";
-                break;
-            case "log":
-                tempat = "batang";
-                break;
-            case "water":
-                tempat = "air";
-                break;
+            case "leaves": tempat = "daun"; break;
+            case "log": tempat = "batang"; break;
+            case "water": tempat = "air"; break;
         }
 
         holder.textNama.setText(db.getHama(history.getHama()).getNama().substring(0, 1).toUpperCase() + db.getHama(history.getHama()).getNama().substring(1));
